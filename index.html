@@ -1,1905 +1,399 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>DevSecOps Bolivia | Comunidad</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Comunidad DevSecOps Bolivia: cultura, automatización, seguridad y operaciones en una misma comunidad." />
-
-  <!-- Meta Open Graph -->
-  <meta property="og:title" content="DevSecOps Bolivia" />
-  <meta property="og:description" content="Comunidad DevSecOps Bolivia: cultura, automatización, seguridad y operaciones en una misma comunidad." />
-  <meta property="og:type" content="website" />
-  <!-- <meta property="og:image" content="URL_DE_TU_IMAGEN_DE_PREVIEW"> -->
-
-  <style>
-    :root {
-      --bg: #0f172a;
-      --bg-elevated: #111827;
-      --bg-soft: rgba(15, 23, 42, 0.7);
-      --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.12);
-      --accent-strong: #16a34a;
-      --text: #e5e7eb;
-      --text-soft: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.35);
-      --danger: #fb7185;
-      --warning: #fbbf24;
-      --info: #38bdf8;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
-      --radius-xl: 1.2rem;
-      --radius-full: 999px;
-      --transition-fast: 160ms ease-out;
-      --transition-med: 220ms ease-out;
-    }
-
-    body.light {
-      --bg: #f3f4f6;
-      --bg-elevated: #ffffff;
-      --bg-soft: rgba(243, 244, 246, 0.8);
-      --accent: #16a34a;
-      --accent-soft: rgba(22, 163, 74, 0.12);
-      --accent-strong: #15803d;
-      --text: #111827;
-      --text-soft: #6b7280;
-      --border-subtle: rgba(148, 163, 184, 0.5);
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: radial-gradient(circle at top, #1d283a 0, #020617 60%),
-        #020617;
-      background-attachment: fixed;
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Layout base */
-    .page {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
-    }
-
-    /* Header / Nav */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-          to bottom,
-          rgba(15, 23, 42, 0.92),
-          rgba(15, 23, 42, 0.75),
-          transparent
-        );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at 20% 0, #22c55e, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #e5e7eb;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.35);
-    }
-
-    .brand-text-main {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-    }
-
-    .brand-text-sub {
-      font-size: 0.75rem;
-      color: var(--text-soft);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      padding: 0.35rem 0.2rem;
-      color: var(--text-soft);
-      border-bottom: 1px solid transparent;
-      transition: color var(--transition-fast),
-        border-color var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pill-btn {
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 0.35rem 0.9rem;
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-soft);
-      cursor: pointer;
-      transition: background var(--transition-fast),
-        border-color var(--transition-fast), color var(--transition-fast),
-        transform var(--transition-fast), box-shadow var(--transition-fast);
-    }
-
-    .pill-btn span.icon {
-      font-size: 0.95rem;
-    }
-
-    .pill-btn:hover {
-      background: rgba(15, 23, 42, 0.95);
-      border-color: var(--accent);
-      color: var(--text);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.7);
-    }
-
-    .pill-btn.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #022c22;
-      border-color: transparent;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.5);
-    }
-
-    .pill-btn.primary:hover {
-      transform: translateY(-1px) scale(1.02);
-      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.65);
-    }
-
-    .theme-toggle {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-soft);
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: background var(--transition-fast), color var(--transition-fast),
-        transform var(--transition-fast), box-shadow var(--transition-fast),
-        border-color var(--transition-fast);
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
-    }
-
-    .burger {
-      display: none;
-      flex-direction: column;
-      width: 28px;
-      gap: 5px;
-      cursor: pointer;
-    }
-
-    .burger span {
-      height: 2px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.9);
-      transition: transform var(--transition-fast), opacity var(--transition-fast);
-    }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3.5fr) minmax(0, 2.5fr);
-      gap: 3rem;
-      margin-top: 1.75rem;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-full);
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      font-size: 0.76rem;
-      color: var(--accent);
-      margin-bottom: 0.9rem;
-    }
-
-    .hero-kicker-tag {
-      background: rgba(15, 23, 42, 0.7);
-      padding: 0.12rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--text-soft);
-    }
-
-    .hero-title {
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      letter-spacing: 0.03em;
-      margin: 0 0 0.6rem;
-    }
-
-    .hero-title span.gradient {
-      background: linear-gradient(120deg, #22c55e, #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      color: var(--text-soft);
-      font-size: 0.96rem;
-      max-width: 32rem;
-    }
-
-    .hero-subtitle strong {
-      color: var(--text);
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin: 1.4rem 0 0.8rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      align-items: center;
-    }
-
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .hero-meta span.dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.6);
-    }
-
-    .hero-right {
-      position: relative;
-    }
-
-    .hero-card {
-      border-radius: 1.4rem;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.15), transparent 55%) 
-        , radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.12), transparent 55%) 
-        , rgba(15, 23, 42, 0.95);
-      padding: 1.4rem 1.3rem 1.2rem;
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-card-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-soft);
-    }
-
-    .hero-card-badge {
-      font-size: 0.7rem;
-      border-radius: 999px;
-      padding: 0.18rem 0.6rem;
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #38bdf8;
-      background: rgba(15, 23, 42, 0.7);
-    }
-
-    .hero-card-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .hero-card-score {
-      font-size: 2.1rem;
-      font-weight: 700;
-    }
-
-    .hero-card-score small {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--text-soft);
-    }
-
-    .hero-card-chiprow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.7rem;
-    }
-
-    .chip {
-      border-radius: 999px;
-      padding: 0.18rem 0.6rem;
-      font-size: 0.7rem;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: var(--text-soft);
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .chip.accent {
-      border-color: rgba(34, 197, 94, 0.7);
-      color: #bbf7d0;
-      background: rgba(22, 163, 74, 0.18);
-    }
-
-    .hero-card-graph {
-      padding: 0.75rem;
-      border-radius: 1rem;
-      border: 1px dashed rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.12), transparent 55%), 
-        rgba(15, 23, 42, 0.85);
-      font-size: 0.7rem;
-      color: var(--text-soft);
-    }
-
-    .hero-card-graph-bars {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.35rem;
-      margin-top: 0.6rem;
-      align-items: end;
-    }
-
-    .bar {
-      border-radius: 999px 999px 4px 4px;
-      background: rgba(55, 65, 81, 0.9);
-      overflow: hidden;
-      position: relative;
-      height: 44px;
-    }
-
-    .bar-fill {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-radius: inherit;
-      background: linear-gradient(180deg, rgba(34, 197, 94, 0.2), var(--accent));
-    }
-
-    .bar-label {
-      font-size: 0.7rem;
-      text-align: center;
-      margin-top: 0.15rem;
-      color: var(--text-soft);
-    }
-
-    .hero-card-footer {
-      margin-top: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 0.75rem;
-      color: var(--text-soft);
-    }
-
-    .hero-card-footer span.highlight {
-      color: #bbf7d0;
-    }
-
-    /* Stats strip */
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin: 2.2rem 0 1.5rem;
-    }
-
-    .stat {
-      border-radius: 999px;
-      padding: 0.65rem 0.9rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.85);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.55);
-      font-size: 0.8rem;
-    }
-
-    .stat-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(34, 197, 94, 0.15);
-      color: var(--accent);
-      font-size: 1rem;
-    }
-
-    .stat-main {
-      font-weight: 600;
-    }
-
-    .stat-sub {
-      color: var(--text-soft);
-      font-size: 0.75rem;
-    }
-
-    /* Sections */
-    section {
-      padding: 1.5rem 0 0.5rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-soft);
-    }
-
-    .section-desc {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      max-width: 32rem;
-    }
-
-    .tag-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-bottom: 1rem;
-    }
-
-    .tag-filter button {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 0.2rem 0.7rem;
-      font-size: 0.76rem;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-soft);
-      cursor: pointer;
-      transition: background var(--transition-fast), color var(--transition-fast),
-        border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .tag-filter button.active {
-      background: var(--accent);
-      color: #022c22;
-      border-color: transparent;
-      font-weight: 600;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(34, 197, 94, 0.6);
-    }
-
-    /* Blog cards */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .blog-card {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
-      position: relative;
-      overflow: hidden;
-      transition: transform var(--transition-med), box-shadow var(--transition-med),
-        border-color var(--transition-med), background var(--transition-med);
-    }
-
-    .blog-card.featured {
-      grid-row: span 2;
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.16), transparent 60%), 
-        rgba(15, 23, 42, 0.95);
-    }
-
-    .blog-card:hover {
-      transform: translateY(-4px) translateZ(0);
-      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.9);
-      border-color: rgba(34, 197, 94, 0.9);
-      background: rgba(15, 23, 42, 0.98);
-    }
-
-    .blog-meta-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.6rem;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--text-soft);
-    }
-
-    .blog-meta-top span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .blog-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 0.2rem;
-    }
-
-    .blog-excerpt {
-      font-size: 0.86rem;
-      color: var(--text-soft);
-    }
-
-    .blog-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.3rem;
-    }
-
-    .blog-tag {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      padding: 0.1rem 0.5rem;
-      font-size: 0.7rem;
-      color: var(--text-soft);
-    }
-
-    .blog-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.4rem;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      color: var(--text-soft);
-    }
-
-    .blog-footer a.read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-      border-radius: 999px;
-      padding: 0.2rem 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .blog-footer a.read-more:hover {
-      background: rgba(34, 197, 94, 0.08);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    /* Events */
-    .events {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .events-card,
-    .events-list {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.92);
-      padding: 1rem;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-    }
-
-    .events-card h3,
-    .events-list h3 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-soft);
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    .events-highlight {
-      border-radius: 1rem;
-      border: 1px solid rgba(34, 197, 94, 0.7);
-      padding: 0.8rem;
-      background: rgba(22, 163, 74, 0.08);
-      font-size: 0.85rem;
-    }
-
-    .events-highlight strong {
-      color: #bbf7d0;
-    }
-
-    .events-details {
-      margin-top: 0.6rem;
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    .events-cta {
-      margin-top: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      cursor: pointer;
-      font-size: 0.8rem;
-      border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      transition: background var(--transition-fast), border-color var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .events-cta:hover {
-      background: rgba(34, 197, 94, 0.08);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .timeline {
-      margin-top: 0.4rem;
-      padding-left: 0.2rem;
-      border-left: 1px solid rgba(148, 163, 184, 0.6);
-      display: grid;
-      gap: 0.7rem;
-      font-size: 0.8rem;
-    }
-
-    .timeline-item {
-      padding-left: 0.6rem;
-      position: relative;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -0.39rem;
-      top: 0.4rem;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 1);
-      border: 2px solid var(--accent);
-    }
-
-    .timeline-title {
-      font-weight: 600;
-    }
-
-    .timeline-meta {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-    }
-
-    .timeline-tag {
-      display: inline-flex;
-      padding: 0.05rem 0.4rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.7rem;
-      margin-top: 0.2rem;
-      color: var(--text-soft);
-    }
-
-    /* Recursos / Comunidad / Contacto */
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.92);
-      padding: 0.9rem;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.8);
-      font-size: 0.85rem;
-    }
-
-    .card h3 {
-      font-size: 0.9rem;
-      margin-top: 0;
-      margin-bottom: 0.3rem;
-    }
-
-    .card p {
-      font-size: 0.82rem;
-      color: var(--text-soft);
-    }
-
-    .card ul {
-      list-style: none;
-      margin: 0.3rem 0 0;
-      padding: 0;
-      font-size: 0.8rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .card ul li span.bullet {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .card a.link-inline {
-      border-bottom: 1px dashed rgba(148, 163, 184, 0.6);
-      padding-bottom: 1px;
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .card a.link-inline:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .pill-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      border-radius: 999px;
-      padding: 0.1rem 0.6rem;
-      font-size: 0.72rem;
-      background: rgba(22, 163, 74, 0.18);
-      border: 1px solid rgba(34, 197, 94, 0.7);
-      color: #bbf7d0;
-      margin-bottom: 0.3rem;
-    }
-
-    .pill-status.warn {
-      background: rgba(234, 179, 8, 0.12);
-      border-color: rgba(250, 204, 21, 0.7);
-      color: #fef9c3;
-    }
-
-    .pill-status.info {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: rgba(56, 189, 248, 0.7);
-      color: #e0f2fe;
-    }
-
-    /* Contacto */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .contact-card {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.96);
-      padding: 1rem;
-      font-size: 0.85rem;
-      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.9);
-    }
-
-    .contact-card h3 {
-      margin-top: 0;
-      margin-bottom: 0.4rem;
-    }
-
-    .contact-meta {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 0.6rem;
-    }
-
-    form {
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.25rem;
-      font-size: 0.82rem;
-    }
-
-    .field label {
-      color: var(--text-soft);
-      font-size: 0.8rem;
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      border-radius: 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 0.45rem 0.6rem;
-      color: var(--text);
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-        background var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .field input::placeholder,
-    .field textarea::placeholder {
-      color: rgba(148, 163, 184, 0.8);
-    }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
-      transform: translateY(-1px);
-      background: rgba(15, 23, 42, 0.96);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.6rem;
-    }
-
-    .form-hint {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-    }
-
-    .form-submit-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      margin-top: 0.4rem;
-    }
-
-    .form-toast {
-      font-size: 0.78rem;
-      color: #bbf7d0;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .form-toast.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 1.2rem 0 1.6rem;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      background: radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), #020617);
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
-      padding-bottom: 1px;
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .footer-links a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    /* Back to top */
-    .back-to-top {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: var(--text-soft);
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition-fast), transform var(--transition-fast),
-        box-shadow var(--transition-fast), border-color var(--transition-fast);
-      z-index: 40;
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .back-to-top:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-right {
-        order: -1;
-      }
-
-      .stats-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .events {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .cards-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .contact-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .blog-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .blog-card.featured {
-        grid-row: auto;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav-links {
-        display: none;
-      }
-
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        background: rgba(15, 23, 42, 0.97);
-        border-radius: 1rem;
-        padding: 0.8rem 0.9rem;
-        position: absolute;
-        top: 3.2rem;
-        left: 1.25rem;
-        right: 1.25rem;
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-      }
-
-      .nav-links a {
-        width: 100%;
-        padding: 0.4rem 0;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      .nav {
-        position: relative;
-      }
-
-      .stats-strip {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .cards-3 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .shell {
-        padding-inline: 1rem;
-      }
-
-      .hero-title {
-        font-size: 1.7rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSecOps Community Bolivia</title>
+
+    <style>
+        :root {
+            --bol-red: #C62828;
+            --bol-yellow: #F9A825;
+            --bol-green: #2E7D32;
+
+            --accent: var(--bol-green);
+
+            --dark-bg: #080B16;
+            --dark-card: #111827;
+            --dark-soft: #0F172A;
+
+            --text-light: #E5E7EB;
+            --text-soft: #9CA3AF;
+
+            --transition: 0.25s ease;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            transition: background var(--transition), color var(--transition);
+        }
+
+        body.light {
+            background: #f5f5f5;
+            color: #111;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 46px;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 15, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 999;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .brand img {
+            width: 95px;
+            height: 95px;
+            object-fit: contain;
+            filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.6));
+        }
+
+        .brand-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+            margin: 0 14px;
+            text-decoration: none;
+            transition: color var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--bol-yellow);
+        }
+
+        .theme-btn {
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-btn:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            padding: 90px 48px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--bol-green), var(--bol-yellow), var(--bol-red));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 520px;
+            color: var(--text-soft);
+            font-size: 1.1rem;
+            line-height: 1.6rem;
+        }
+
+        .hero-btn {
+            background: var(--bol-green);
+            padding: 14px 28px;
+            border-radius: 12px;
+            color: white;
+            display: inline-block;
+            margin-top: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .hero-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-3px);
+        }
+
+        .hero-img img {
+            max-width: 520px;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 70px 48px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-sub {
+            max-width: 650px;
+            color: var(--text-soft);
+            margin-bottom: 40px;
+        }
+
+        /* GRID */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--dark-card);
+            padding: 24px;
+            border-radius: 14px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+
+        /* EVENTOS */
+        .event-img {
+            width: 100%;
+            max-width: 650px;
+            border-radius: 14px;
+            box-shadow: 0 12px 38px rgba(0,0,0,0.5);
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 18px;
+            background: var(--dark-soft);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .faq-item h4 {
+            margin: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin-top: 40px;
+            color: var(--text-soft);
+        }
+    </style>
 </head>
+
 <body>
-  <div class="page">
-    <header id="inicio">
-      <div class="shell nav">
+
+    <!-- HEADER -->
+    <header>
         <div class="brand">
-          <div class="brand-icon">DS</div>
-          <div>
-            <div class="brand-text-main">DevSecOps Bolivia</div>
-            <div class="brand-text-sub">Cultura · Automatización · Seguridad</div>
-          </div>
+            <img src="devsecops_logo.png" alt="Logo DevSecOps Bolivia">
+            <span class="brand-title">DevSecOps Community Bolivia</span>
         </div>
 
-        <nav class="nav-links" id="navLinks">
-          <a href="#blog">Blog</a>
-          <a href="#eventos">Eventos</a>
-          <a href="#recursos">Recursos</a>
-          <a href="#comunidad">Comunidad</a>
-          <a href="#contacto">Contacto</a>
+        <nav class="nav-links">
+            <a href="#blog">Blog</a>
+            <a href="#eventos">Eventos</a>
+            <a href="#recursos">Recursos</a>
+            <a href="#comunidad">Comunidad</a>
+            <a href="#faq">FAQ</a>
+            <button class="theme-btn" id="themeToggle">🌙 Modo Claro</button>
         </nav>
-
-        <div class="nav-actions">
-          <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-            ☾
-          </button>
-          <a href="https://discord.com" target="_blank" class="pill-btn primary" rel="noopener noreferrer">
-            <span class="icon">#</span>
-            <span>Únete al Discord</span>
-          </a>
-          <div class="burger" id="burger">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
     </header>
 
-    <main class="shell">
-      <!-- Hero -->
-      <section class="hero">
+    <!-- HERO -->
+    <section class="hero">
         <div>
-          <div class="hero-kicker">
-            <span>Comunidad técnica en Bolivia</span>
-            <span class="hero-kicker-tag">Dev + Sec + Ops</span>
-          </div>
-          <h1 class="hero-title">
-            Donde <span class="gradient">desarrollo, seguridad y operaciones</span>
-            se encuentran.
-          </h1>
-          <p class="hero-subtitle">
-            <strong>DevSecOps Bolivia</strong> es una comunidad para aprender,
-            compartir y construir prácticas modernas de CI/CD, seguridad
-            aplicada, automatización y cultura colaborativa, con foco en la
-            realidad de equipos en Bolivia y LATAM.
-          </p>
-
-          <div class="hero-cta">
-            <a href="#blog" class="pill-btn primary">
-              <span class="icon">✍</span>
-              <span>Leer artículos</span>
-            </a>
-            <a href="#eventos" class="pill-btn">
-              <span class="icon">📆</span>
-              <span>Próximo meetup</span>
-            </a>
-          </div>
-
-          <div class="hero-meta">
-            <span>✅ Comunidad abierta &amp; gratuita</span>
-            <span class="dot"></span>
-            <span>🇧🇴 Cochabamba · La Paz · Santa Cruz</span>
-            <span class="dot"></span>
-            <span>☁️ Kubernetes · Cloud · AppSec · SRE</span>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="hero-card" aria-label="Resumen de madurez DevSecOps">
-            <div class="hero-card-header">
-              <span class="hero-card-title">Radar DevSecOps</span>
-              <span class="hero-card-badge">Comunidad Bolivia · 2025</span>
-            </div>
-
-            <div class="hero-card-body">
-              <div>
-                <div class="hero-card-score">
-                  64<span style="font-size: 1.4rem; opacity: 0.8;">/</span>100
-                  <small>madurez promedio</small>
-                </div>
-                <div class="hero-card-chiprow">
-                  <span class="chip accent">CI/CD</span>
-                  <span class="chip">Threat Modeling</span>
-                  <span class="chip">Kubernetes</span>
-                  <span class="chip">Shift-left security</span>
-                </div>
-              </div>
-              <div class="hero-card-graph">
-                <div>Prácticas por área · 2025</div>
-                <div class="hero-card-graph-bars">
-                  <div>
-                    <div class="bar">
-                      <div class="bar-fill" style="height: 88%;"></div>
-                    </div>
-                    <div class="bar-label">CI/CD</div>
-                  </div>
-                  <div>
-                    <div class="bar">
-                      <div class="bar-fill" style="height: 65%;"></div>
-                    </div>
-                    <div class="bar-label">Seg. App</div>
-                  </div>
-                  <div>
-                    <div class="bar">
-                      <div class="bar-fill" style="height: 54%;"></div>
-                    </div>
-                    <div class="bar-label">Cloud</div>
-                  </div>
-                  <div>
-                    <div class="bar">
-                      <div class="bar-fill" style="height: 42%;"></div>
-                    </div>
-                    <div class="bar-label">Cultura</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-card-footer">
-              <span>📊 Datos simulados para demo</span>
-              <span class="highlight">Comparte tus métricas y experiencias en el próximo meetup.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Stats -->
-      <section aria-label="Resumen comunidad">
-        <div class="stats-strip">
-          <div class="stat">
-            <div class="stat-icon">👥</div>
-            <div>
-              <div class="stat-main">+120 miembros</div>
-              <div class="stat-sub">en Slack / Discord</div>
-            </div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">🏙</div>
-            <div>
-              <div class="stat-main">3 ciudades</div>
-              <div class="stat-sub">meetups presenciales</div>
-            </div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">🎤</div>
-            <div>
-              <div class="stat-main">+20 charlas</div>
-              <div class="stat-sub">dev, sec &amp; ops</div>
-            </div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">💻</div>
-            <div>
-              <div class="stat-main">4 labs</div>
-              <div class="stat-sub">Kubernetes, pipelines, AppSec</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Blog -->
-      <section id="blog">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Blog · conocimiento aplicado</div>
-            <div class="section-title">Artículos de la comunidad</div>
-          </div>
-          <p class="section-desc">
-            Casos reales, prácticas recomendadas y aprendizajes sobre cómo
-            integrar seguridad en el ciclo de vida de desarrollo, desde equipos
-            pequeños hasta organizaciones reguladas.
-          </p>
-        </div>
-
-        <div class="tag-filter" id="tagFilter">
-          <button data-tag="all" class="active">Todo</button>
-          <button data-tag="devops">DevOps &amp; CI/CD</button>
-          <button data-tag="security">Seguridad</button>
-          <button data-tag="kubernetes">Kubernetes</button>
-          <button data-tag="cloud">Cloud</button>
-          <button data-tag="cultura">Cultura &amp; equipos</button>
-        </div>
-
-        <div class="blog-grid" id="blogGrid">
-          <!-- Artículo destacado -->
-          <article class="blog-card featured" data-tags="devops security cultura">
-            <div class="blog-meta-top">
-              <span>📅 10 diciembre 2025 · ⏱ 10 min</span>
-              <span>Por Comunidad DevSecOps Bolivia</span>
-            </div>
-            <h2 class="blog-title">
-              De DevOps a DevSecOps en equipos pequeños: lecciones desde Bolivia
-            </h2>
-            <p class="blog-excerpt">
-              ¿Realmente necesito un equipo dedicado de seguridad para empezar con DevSecOps?
-              Spoiler: no. En este artículo revisamos patrones simples que equipos de 3-5
-              personas pueden aplicar hoy para integrar seguridad sin frenar la entrega
-              continua.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">DevOps</span>
-              <span class="blog-tag">DevSecOps</span>
-              <span class="blog-tag">Cultura</span>
-            </div>
-            <div class="blog-footer">
-              <a href="#contacto" class="read-more">
-                <span>Proponer charla basada en este tema</span> <span>→</span>
-              </a>
-              <span>✉️ ¿Quieres publicar aquí? Contáctanos abajo.</span>
-            </div>
-          </article>
-
-          <article class="blog-card" data-tags="kubernetes security cloud">
-            <div class="blog-meta-top">
-              <span>📅 28 noviembre 2025 · ⏱ 8 min</span>
-              <span>Autor: Invitado</span>
-            </div>
-            <h3 class="blog-title">
-              Escaneando imágenes de contenedores en tu pipeline sin romper al equipo
-            </h3>
-            <p class="blog-excerpt">
-              Integrar análisis de vulnerabilidades a imágenes puede ser un dolor si cada
-              build empieza a fallar. Vemos una estrategia gradual para introducir herramientas
-              como Trivy o Grype, definir políticas por severidad y acordar excepciones con el
-              negocio.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Kubernetes</span>
-              <span class="blog-tag">Seguridad</span>
-              <span class="blog-tag">Pipelines</span>
-            </div>
-            <div class="blog-footer">
-              <a href="#contacto" class="read-more">
-                <span>Leer cuando esté publicado</span> <span>→</span>
-              </a>
-              <span>Borrador en construcción</span>
-            </div>
-          </article>
-
-          <article class="blog-card" data-tags="cloud security">
-            <div class="blog-meta-top">
-              <span>📅 15 noviembre 2025 · ⏱ 6 min</span>
-              <span>Autor: Comunidad</span>
-            </div>
-            <h3 class="blog-title">
-              Hardening básico para cuentas cloud: checklist práctico
-            </h3>
-            <p class="blog-excerpt">
-              Una guía terrenal para no dejar tu cuenta cloud "en modo laboratorio" en
-              producción. MFA, cuentas de servicio, claves rotadas, separación de entornos
-              y mínimos controles que cualquier equipo puede aplicar.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Cloud</span>
-              <span class="blog-tag">Seguridad</span>
-              <span class="blog-tag">Checklists</span>
-            </div>
-            <div class="blog-footer">
-              <a href="#contacto" class="read-more">
-                <span>Quiero aportar tips</span> <span>→</span>
-              </a>
-              <span>En revisión por la comunidad</span>
-            </div>
-          </article>
-
-          <article class="blog-card" data-tags="cultura devops">
-            <div class="blog-meta-top">
-              <span>📅 02 noviembre 2025 · ⏱ 5 min</span>
-              <span>Autor: Comunidad</span>
-            </div>
-            <h3 class="blog-title">
-              Cómo arrancar un capítulo DevSecOps dentro de tu empresa
-            </h3>
-            <p class="blog-excerpt">
-              No necesitas presupuesto gigante para empezar: proponemos un modelo ligero de
-              capítulo interno con un sponsor, métricas simples y un roadmap trimestral que
-              cualquier área de TI en Bolivia puede adoptar.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Cultura</span>
-              <span class="blog-tag">Comunidades</span>
-            </div>
-            <div class="blog-footer">
-              <a href="#contacto" class="read-more">
-                <span>Descargar guía interna</span> <span>→</span>
-              </a>
-              <span>PDF disponible bajo petición</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Eventos -->
-      <section id="eventos">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Meetups · talleres · labs</div>
-            <div class="section-title">Eventos &amp; actividades</div>
-          </div>
-          <p class="section-desc">
-            Charlas técnicas, sesiones de laboratorio en vivo y espacios para discutir
-            incidentes, postmortems y buenas prácticas, con enfoque en el contexto
-            regulatorio y operativo de Bolivia.
-          </p>
-        </div>
-
-        <div class="events">
-          <div class="events-card">
-            <h3>Próximo meetup</h3>
-            <div class="events-highlight">
-              <strong>DevSecOps Bolivia Meetup #03</strong><br />
-              Cochabamba · Enero 2026 (fecha por definir)
-            </div>
-            <div class="events-details">
-              Tema tentativo: <strong>"Observabilidad y seguridad en pipelines CI/CD"</strong><br />
-              Formato: 2 charlas cortas + panel abierto + networking.
-              <br /><br />
-              Buscamos ponentes para:
-              <ul>
-                <li>· Historias reales de automatización de controles.</li>
-                <li>· Casos de uso con Kubernetes / contenedores.</li>
-                <li>· Integraciones de seguridad en bancos / fintech / telcos.</li>
-              </ul>
-            </div>
-            <button class="events-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
-              ✉️ Quiero proponer una charla
-            </button>
-          </div>
-
-          <div class="events-list">
-            <h3>Eventos pasados</h3>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">
-                  Meetup #02 · "Kubernetes seguro sin morir en el intento"
-                </div>
-                <div class="timeline-meta">
-                  Octubre 2025 · La Paz · 40 asistentes · 2 labs prácticos
-                </div>
-                <div class="timeline-tag">Kubernetes · RBAC · NetworkPolicies</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">
-                  Meetup #01 · "De pipelines a plataformas"
-                </div>
-                <div class="timeline-meta">
-                  Agosto 2025 · Online · +80 registros
-                </div>
-                <div class="timeline-tag">CI/CD · Plataformas internas</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">
-                  Taller comunitario · "Primeros pasos en threat modeling"
-                </div>
-                <div class="timeline-meta">
-                  Marzo 2025 · Santa Cruz · 15 participantes
-                </div>
-                <div class="timeline-tag">Threat Modeling · Diagramas</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Recursos -->
-      <section id="recursos">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Playbooks · repos · herramientas</div>
-            <div class="section-title">Recursos recomendados</div>
-          </div>
-          <p class="section-desc">
-            Curamos contenido y ejemplos prácticos para que puedas aplicar DevSecOps
-            en tu día a día. Puedes usar esta sección para enlazar repositorios,
-            documentación interna o recursos públicos.
-          </p>
-        </div>
-
-        <div class="cards-3">
-          <div class="card">
-            <span class="pill-status info">🧪 Playbooks &amp; guías</span>
-            <h3>Playbooks prácticos</h3>
+            <h1 class="hero-title">Seguridad • Automatización • Cultura</h1>
             <p>
-              Documentos cortos y accionables para implementar controles de seguridad
-              sin frenar a desarrollo.
+                La comunidad líder de DevSecOps en Bolivia. Compartimos prácticas modernas de CI/CD, Kubernetes, Cloud,
+                AppSec y cultura DevOps con enfoque boliviano y latinoamericano.
             </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Checklist de pipeline seguro (plantilla)</a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Modelo de políticas por severidad de vulnerabilidades</a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Ejemplo de RFC para introducir DevSecOps en tu empresa</a>
-              </li>
-            </ul>
-          </div>
 
-          <div class="card">
-            <span class="pill-status">💻 Repositorios &amp; demos</span>
-            <h3>Repos de la comunidad</h3>
-            <p>
-              Pipelines de ejemplo, labs de Kubernetes y configuraciones de referencia
-              para que puedas experimentar.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Pipeline CI con escaneo SAST y dependencia</a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Cluster local para labs (kind / k3d)</a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                <a href="#" class="link-inline">Ejemplo de GitOps con políticas de seguridad</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <span class="pill-status warn">🛠 Herramientas sugeridas</span>
-            <h3>Stack sugerido</h3>
-            <p>
-              Lista viva de herramientas open source y servicios que se adaptan bien
-              a equipos en Bolivia.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                SAST: Semgrep, SonarQube Community
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Contenedores: Trivy, Grype
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Secret scanning: Gitleaks, repos auto-hook
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Comunidad -->
-      <section id="comunidad">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Personas · canales · código abierto</div>
-            <div class="section-title">Cómo participar</div>
-          </div>
-          <p class="section-desc">
-            La comunidad vive donde están las conversaciones: canales online para el
-            día a día y encuentros periódicos para construir confianza y redes.
-          </p>
+            <a class="hero-btn" href="#blog">Explorar contenido</a>
         </div>
 
-        <div class="cards-3">
-          <div class="card">
-            <h3>Canales online</h3>
-            <p>
-              Únete a nuestros canales para preguntar, compartir dudas y coordinar
-              actividades.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="link-inline">
-                  Discord comunitario
-                </a> (canales por stack)
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Grupo de Telegram / WhatsApp (pendiente)
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Reuniones mensuales online de 45 minutos
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Voluntariado &amp; organización</h3>
-            <p>
-              La comunidad se sostiene con gente que dona tiempo. Puedes ayudar con
-              logística, diseño, moderación o contenido.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                Apoyar en la organización de meetups locales
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Revisar artículos y talk proposals
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Mantener la web y repos comunitarios
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Empresas &amp; patrocinio</h3>
-            <p>
-              Si eres empresa, puedes apoyar con espacio físico, snacks, speakers o
-              apoyo económico puntual.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                Ofrecer tu oficina como sede de meetup
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Proponer casos reales (anónimos) para analizar
-              </li>
-              <li>
-                <span class="bullet"></span>
-                Patrocinar viajes para speakers entre ciudades
-              </li>
-            </ul>
-          </div>
+        <div class="hero-img">
+            <img src="https://cdn.pixabay.com/photo/2017/06/23/16/17/devops-2432051_960_720.png">
         </div>
-      </section>
+    </section>
 
-      <!-- Contacto -->
-      <section id="contacto">
-        <div class="section-header">
-          <div>
-            <div class="section-kicker">Conversemos</div>
-            <div class="section-title">Contacto &amp; newsletter</div>
-          </div>
-          <p class="section-desc">
-            ¿Quieres dar una charla, proponer un taller, apoyar con infraestructura o simplemente
-            sumarte al siguiente evento? Escríbenos y conversemos.
-          </p>
+    <!-- BLOG -->
+    <section id="blog">
+        <h2 class="section-title">Artículos recientes</h2>
+        <p class="section-sub">Contenido creado por la comunidad DevSecOps Bolivia.</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981d">
+                <h3>Adoptando DevSecOps en equipos pequeños</h3>
+                <p>Implementación ligera de seguridad en el ciclo de desarrollo.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555940516-42339f42f6a1">
+                <h3>Kubernetes seguro en producción</h3>
+                <p>Buenas prácticas aplicadas en organizaciones bolivianas.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1581092334572-22dca62a3a3b">
+                <h3>CI/CD con análisis de vulnerabilidades</h3>
+                <p>Cómo integrar seguridad sin romper al equipo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos">
+        <h2 class="section-title">Próximo Meetup Virtual</h2>
+        <p class="section-sub">
+            Charlas técnicas 100% online. Participa desde cualquier ciudad de Bolivia o Latinoamérica.
+            Conecta con profesionales en DevOps, Seguridad, Cloud y Kubernetes.
+        </p>
+
+        <img class="event-img"
+             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+             alt="Meetup Virtual DevSecOps">
+
+        <h3 style="margin-top: 18px; color: var(--bol-yellow);">Meetup #03 – Enero 2026</h3>
+
+        <p>
+            Tema central: <strong>“Observabilidad y seguridad en pipelines CI/CD en entornos Cloud-Nativos”</strong><br>
+            Modalidad: <strong>Virtual (Zoom / Google Meet)</strong> <br>
+            Incluye: 2 charlas + panel de preguntas en vivo + recursos descargables.
+        </p>
+
+        <a class="hero-btn" style="margin-top: 16px;" href="#">
+            Registrarme al Meetup Virtual
+        </a>
+    </section>
+
+    <!-- RECURSOS -->
+    <section id="recursos">
+        <h2 class="section-title">Recursos esenciales</h2>
+        <p class="section-sub">Playbooks, herramientas y repos recomendados por la comunidad.</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3>Playbooks</h3>
+                <p>Guías rápidas listas para implementar.</p>
+            </div>
+
+            <div class="card">
+                <h3>Repositorios</h3>
+                <p>Ejemplos funcionales de pipelines y Kubernetes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Herramientas sugeridas</h3>
+                <p>Trivy, Semgrep, Gitleaks y más.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMUNIDAD -->
+    <section id="comunidad">
+        <h2 class="section-title">Únete a la comunidad</h2>
+        <p class="section-sub">Participa en talleres, meetups y discusiones técnicas.</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3>Discord</h3>
+                <p>Debates, soporte, labs y networking.</p>
+            </div>
+
+            <div class="card">
+                <h3>Voluntariado</h3>
+                <p>Ayuda en eventos, contenido y proyectos.</p>
+            </div>
+
+            <div class="card">
+                <h3>Empresas Aliadas</h3>
+                <p>Patrocinios, speakers y espacios.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-sub">Todo lo que debes saber para empezar.</p>
+
+        <div class="faq-item">
+            <h4>¿La comunidad tiene costo?</h4>
+            <p>No. Todo es gratuito.</p>
         </div>
 
-        <div class="contact-layout">
-          <div class="contact-card">
-            <h3>Newsletter de DevSecOps Bolivia</h3>
-            <p class="contact-meta">
-              Enviamos un resumen mensual con artículos, eventos y oportunidades de la comunidad.
-            </p>
-            <form id="contactForm">
-              <div class="form-row">
-                <div class="field">
-                  <label for="nombre">Nombre completo</label>
-                  <input id="nombre" name="nombre" type="text" placeholder="Ej. Ana Pérez" required />
-                </div>
-                <div class="field">
-                  <label for="email">Correo electrónico</label>
-                  <input id="email" name="email" type="email" placeholder="tu@empresa.com" required />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="field">
-                  <label for="rol">Tu rol principal</label>
-                  <select id="rol" name="rol" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="dev">Desarrollador/a</option>
-                    <option value="sec">Seguridad / AppSec</option>
-                    <option value="ops">Infra / SRE / Ops</option>
-                    <option value="lider">Líder técnico / gerencia</option>
-                    <option value="estudiante">Estudiante</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="ciudad">Ciudad</label>
-                  <input id="ciudad" name="ciudad" type="text" placeholder="Ej. La Paz" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="intereses">¿Qué te interesa?</label>
-                <textarea id="intereses" name="intereses" placeholder="Ej.: Kubernetes seguro, automatizar controles en pipelines, compartir un caso de éxito..." required></textarea>
-              </div>
-
-              <div class="form-hint">
-                No compartiremos tus datos con terceros. Usaremos esta información solo para
-                coordinar actividades relacionadas a la comunidad.
-              </div>
-
-              <div class="form-submit-row">
-                <button type="submit" class="pill-btn primary">
-                  <span class="icon">📨</span>
-                  <span>Enviar y suscribirme</span>
-                </button>
-                <div id="formToast" class="form-toast">
-                  ✅ ¡Gracias! Revisaremos tu mensaje y te contactaremos.
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="contact-card">
-            <h3>Otros canales de contacto</h3>
-            <p class="contact-meta">
-              Si prefieres, puedes escribir directamente por estos medios. Ajusta
-              los datos a tu realidad antes de publicar.
-            </p>
-            <ul>
-              <li>
-                <span class="bullet"></span>
-                Correo: <a href="mailto:contacto@devsecops.bo" class="link-inline">
-                  contacto@devsecops.bo
-                </a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                LinkedIn: <a href="#" class="link-inline">Página DevSecOps Bolivia</a>
-              </li>
-              <li>
-                <span class="bullet"></span>
-                GitHub: <a href="#" class="link-inline">github.com/devsecops-bo</a>
-              </li>
-            </ul>
-            <br />
-            <p class="form-hint">
-              Sugerencia: reemplaza los correos y enlaces con los de tu comunidad real antes
-              de publicar la página.
-            </p>
-          </div>
+        <div class="faq-item">
+            <h4>¿Necesito experiencia previa?</h4>
+            <p>No. Hay contenido para todos los niveles.</p>
         </div>
-      </section>
-    </main>
 
+        <div class="faq-item">
+            <h4>¿Puedo dar una charla?</h4>
+            <p>Claro. Escríbenos y te apoyamos.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-      <div class="shell footer-inner">
-        <div>
-          © <span id="year"></span> DevSecOps Bolivia · Hecho con ❤️ por la comunidad.
-        </div>
-        <div class="footer-links">
-          <a href="#inicio">Ir arriba</a>
-          <a href="#blog">Blog</a>
-          <a href="#eventos">Eventos</a>
-          <a href="#recursos">Recursos</a>
-          <a href="#comunidad">Comunidad</a>
-        </div>
-      </div>
+        DevSecOps Community Bolivia — 2025  
+        <br> Construido con orgullo para la comunidad 🇧🇴
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
-  </div>
+    <!-- JS: Tema Claro/Oscuro -->
+    <script>
+        const toggle = document.getElementById("themeToggle");
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("light");
 
-  <script>
-    // Año dinámico
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Modo oscuro / claro
-    (function () {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const stored = localStorage.getItem("devsecops-theme");
-      const body = document.body;
-      const toggle = document.getElementById("themeToggle");
-
-      if (stored === "light" || (!stored && !prefersDark)) {
-        body.classList.add("light");
-        toggle.textContent = "☀︎";
-      } else {
-        toggle.textContent = "☾";
-      }
-
-      toggle.addEventListener("click", () => {
-        body.classList.toggle("light");
-        const isLight = body.classList.contains("light");
-        toggle.textContent = isLight ? "☀︎" : "☾";
-        localStorage.setItem("devsecops-theme", isLight ? "light" : "dark");
-      });
-    })();
-
-    // Menú móvil
-    (function () {
-      const burger = document.getElementById("burger");
-      const navLinks = document.getElementById("navLinks");
-
-      burger.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
+            if (document.body.classList.contains("light")) {
+                toggle.textContent = "🌙 Modo Oscuro";
+            } else {
+                toggle.textContent = "🌞 Modo Claro";
+            }
         });
-      });
-    })();
+    </script>
 
-    // Filtro de tags del blog
-    (function () {
-      const filterContainer = document.getElementById("tagFilter");
-      const cards = Array.from(document.querySelectorAll(".blog-card"));
-
-      filterContainer.addEventListener("click", (e) => {
-        if (e.target.tagName !== "BUTTON") return;
-
-        const tag = e.target.getAttribute("data-tag");
-        filterContainer.querySelectorAll("button").forEach((btn) => {
-          btn.classList.toggle("active", btn === e.target);
-        });
-
-        cards.forEach((card) => {
-          const tags = card.getAttribute("data-tags") || "";
-          if (tag === "all" || tags.includes(tag)) {
-            card.style.display = "";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
-    })();
-
-    // Back to top
-    (function () {
-      const btn = document.getElementById("backToTop");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-          btn.classList.add("visible");
-        } else {
-          btn.classList.remove("visible");
-        }
-      });
-
-      btn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    })();
-
-    // Contact form (demo)
-    (function () {
-      const form = document.getElementById("contactForm");
-      const toast = document.getElementById("formToast");
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        // Aquí podrías hacer un fetch a tu backend o un servicio como Formspree
-        toast.classList.add("visible");
-        setTimeout(() => toast.classList.remove("visible"), 4000);
-        form.reset();
-      });
-    })();
-  </script>
 </body>
+
 </html>
